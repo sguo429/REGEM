@@ -215,8 +215,8 @@ void print_help() {
 
 
     cout << "Phenotype File Options: " << endl
-        << "   --exposure-names \t One or more column names in the phenotype file naming the exposure(s) to be included in interaction tests." << endl
-        << "   --int-covar-names \t Any column names in the phenotype file naming the covariate(s) for which interactions should\n \t\t\t   be included for adjustment (mutually exclusive with --exposure-names)." << endl;
+        << "   --exposure-names \t One or more column names in the input file naming the exposure(s) to be included in interaction tests." << endl
+        << "   --int-covar-names \t Any column names in the input file naming the covariate(s) for which interactions should\n \t\t\t   be included for adjustment (mutually exclusive with --exposure-names)." << endl;
     cout << endl << endl;
     cout << endl << endl;
 

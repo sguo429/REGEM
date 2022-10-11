@@ -1,6 +1,6 @@
 # REGEM
 
-REGEM (GEM-reanalysis-tool) is a software program for re-analyzing large-scale gene-environment interaction testing results, including multi-exposure interaction, joint, and marginal tests. It uses results directly from [GEM](https://github.com/large-scale-gxe-methods/GEM) output.
+REGEM (RE-analysis of GEM summary statistics) is a software program for re-analyzing large-scale gene-environment interaction testing results, including multi-exposure interaction, joint, and marginal tests. It uses results directly from [GEM](https://github.com/large-scale-gxe-methods/GEM) output.
 
 <br />
 Current version: 1.0
@@ -29,6 +29,7 @@ make
 
 ## Dependencies
 
+- GCC with C++11 support
 - boost-1.70.0 or up
 - Intel Math Kernel Library: tested with mkl-2019.3.199
 
@@ -46,14 +47,14 @@ make
 
 ### Command Line Options
 Once REGEM is compiled, the executable ./REGEM can be used to run the program.
-For a list of options, use```cd REGEM/src./REGEM -help```.
+For a list of options, use ```./REGEM -help```.
 
 <details>
      <summary> <b>List of Options</b> </summary>
 
 ```
 General Options:
-
+ 
    --help                
 	Prints available options and exits.
    --version             
@@ -66,22 +67,21 @@ Input File Options:
    --out                
 	Full path and extension to where REGEM output results.
         Default: regem.out
+   --output-style  
+     Modifies the output of GEM. Must be one of the following:
+	minimum: Output the summary statistics for only the GxE and marginal G terms.
+        meta: 'minimum' output plus additional fields for the main G and any GxCovariate terms.
+               For a robust analysis, additional columns for the model-based summary statistics will be included.
+        full: 'meta' output plus additional fields needed for re-analyses of a subset of interactions.
+	Default: minimum  
 
 
 Phenotype File Options:
    --exposure-names      
-	One or more column names in the phenotype file naming the exposure(s) to be included in interaction tests.
+	One or more column names in the input file naming the exposure(s) to be included in interaction tests.
    --int-covar-names     
-	Any column names in the phenotype file naming the covariate(s) for which interactions should be included for adjustment (mutually exclusive with --exposure-names).
+	Any column names in the input file naming the covariate(s) for which interactions should be included for adjustment (mutually exclusive with --exposure-names).
 
-
-Filtering Options:
-   --maf                 
-	Threshold to filter variants based on the minor allele frequency.
-        Default: 0.001
-   --miss-geno-cutoff    
-	Threshold to filter variants based on the missing genotype rate.
-        Default: 0.05
 ```
 </details>
 
@@ -89,7 +89,7 @@ Filtering Options:
 
 ### Input Files
 
-REGEM directly uses output files from GEM (v1.4.1 and up).
+REGEM requires an output file from a GEM run with the --output-style flag set to "full". The --output-style flag is available in GEM v1.4.1 and later versions of the software.
 
 ### Output File Format
 
@@ -135,7 +135,7 @@ robust_P_Value_Joint       - Joint test p-value (K+1 degrees of freedom test of 
 <br />
 
 ```unix
-./REGEM --results-file GEM.out --exposure-names cov1 --int-covar-names cov2 --out regem.out
+./REGEM --results-file gem.out --exposure-names cov1 --out regem_cov1.out
 ```
 <br />
 <br />
@@ -149,8 +149,8 @@ For comments, suggestions, bug reports and questions, please contact Han Chen (H
 ## License 
 
  ```
- GEM : Gene-Environment interaction analysis for Millions of samples
- Copyright (C) 2018-2021  Liang Hong, Han Chen, Duy Pham, Cong Pan
+ REGEM: RE-analysis of GEM summary statistics
+ Copyright (C) 2022 Duy T. Pham and Han Chen
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
