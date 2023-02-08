@@ -404,7 +404,7 @@ void printOutputHeader(FileInfo* fip,  CommandLine* cmd)
     std::vector<std::string> interaction_names = fip->interaction_names;
     std::ofstream results(cmd->outFile, std::ofstream::binary);
 
-    if (cmd->outStyle.compare("full")) {
+    if (cmd->outStyle.compare("full") == 0) {
         results << "#dispersion: " << fip->sigma2 << "\n";
     }
     results << "SNPID" << ((fip->nVarInfo == 8) ? "\tRSID\t" : "\t") << "CHR" << "\t" << "POS" << "\t" << "Non_Effect_Allele" << "\t" << "Effect_Allele" << "\t" << "N_Samples" << "\t" << "AF" << "\t";

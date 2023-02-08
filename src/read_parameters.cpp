@@ -194,7 +194,7 @@ void CommandLine::processCommandLine(int argc, char* argv[])
 void print_welcome() {
     cout << "\n*********************************************************\n";
     cout << "Welcome to REGEM v" << VERSION << "\n";
-    cout << "(C) 2021-2022 Duy Pham and Han Chen \n";
+    cout << "(C) 2021-2023 Duy Pham and Han Chen \n";
     cout << "GNU General Public License v3\n";
     cout << "*********************************************************\n";
 }
@@ -207,14 +207,14 @@ void print_help() {
 
 
 
-    cout << "Input File Options: " << endl
-        << "   --input-file \t Path to the GEM results file." << endl
+    cout << "File Options: " << endl
+        << "   --input-file \t Path to the input file containing GEM results." << endl
         << "   --out \t\t Full path and extension to where REGEM output results. \n \t\t\t    Default: regem.out" << endl
         << "   --output-style \t Modifies the output of REGEM. Must be one of the following: \n\t\t\t    minimum: Output the summary statistics for only the GxE and marginal G terms. \n \t\t\t    meta: 'minimum' output plus additional fields for the main G and any GxCovariate terms \n \t\t\t\t  For a robust analysis, additional columns for the model-based summary statistics will be included.  \n \t\t\t    full: 'meta' output plus additional fields needed for re-analyses of a subset of interactions \n \t\t\t    Default: full" << endl; 
     cout << endl << endl;
 
 
-    cout << "Phenotype File Options: " << endl
+    cout << "Input File Options: " << endl
         << "   --exposure-names \t One or more column names in the input file naming the exposure(s) to be included in interaction tests." << endl
         << "   --int-covar-names \t Any column names in the input file naming the covariate(s) for which interactions should\n \t\t\t   be included for adjustment (mutually exclusive with --exposure-names)." << endl;
     cout << endl << endl;

@@ -1,5 +1,5 @@
 // <REGEM: RE-analysis of GEM summary statistics>
-// Copyright (C) <2022> Duy T. Pham and Han Chen  
+// Copyright (C) <2021-2023> Duy T. Pham and Han Chen  
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -347,7 +347,7 @@ void regem(CommandLine* cmd)
     delete[] RV_dot;
     delete[] A_i;
 
-    cout << "Done.\n\nThere results are in [" << cmd->outFile << "].";
+    cout << "Done.\n\nResults are in [" << cmd->outFile << "].";
     return;
 }
 
