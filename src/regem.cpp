@@ -103,12 +103,14 @@ void regem(CommandLine* cmd)
     std::vector<double> beta(dim);
     std::vector<double> mb_v(dim*dim);
     std::vector<double> rb_v(dim*dim);
-    double* Vi_dot  = new double[nInt1*nInt1];
-    double* VE_dot  = new double[nExp*nExp];
-    double* O       = new double[dim*dim];
-    double* O_dot   = new double[nInt1*nInt1];
-    double* RV_dot  = new double[nInt1*nInt1];
-    double* A_i     = new double[nExp1 * nExp1];
+    double* Vi_dot   = new double[nInt1*nInt1];
+    double* VE_dot   = new double[nExp*nExp];
+    double* O        = new double[dim*dim];
+    double* O_dot    = new double[nInt1*nInt1];
+    double* MRV_prod = new double[dim*dim];
+    double* OV_prod  = new double[nInt1 * nInt1];
+    double* RV_dot   = new double[nInt1*nInt1];
+    double* A_i      = new double[nExp1 * nExp1];
     double M_pvalInt, M_pvalJoint, R_pvalInt, R_pvalJoint;
 
     boost::math::chi_squared chisq_dist_M(1);
@@ -173,13 +175,13 @@ void regem(CommandLine* cmd)
 
         if (robust) {
             //Compute Omega
-            matNmatNprod(&mb_v[0], &rb_v[0], O, dim, dim, dim);
-            matNmatNprod(O, &mb_v[0], O, dim, dim, dim);
+            matNmatNprod(&mb_v[0], &rb_v[0], MRV_prod, dim, dim, dim);
+            matNmatNprod(MRV_prod, &mb_v[0], O, dim, dim, dim);
             subMatrix(O, O_dot, nInt1, nInt1, dim, nInt1, 0);
 
             // Compute robust variance-covariance
-            matNmatNprod(O_dot, Vi_dot,  RV_dot, nInt1, nInt1, nInt1);
-            matNmatNprod(Vi_dot, RV_dot, RV_dot, nInt1, nInt1, nInt1);
+            matNmatNprod(O_dot, Vi_dot,  OV_prod, nInt1, nInt1, nInt1);
+            matNmatNprod(Vi_dot, OV_prod, RV_dot, nInt1, nInt1, nInt1);
 
             // Robust Stat Int
             std::vector<double> StempE(nExp, 0.0);
@@ -207,8 +209,9 @@ void regem(CommandLine* cmd)
             }
 
             double statJoint = 0.0;
-            for (size_t k = 0; k < nExp1; k++)
+            for (size_t k = 0; k < nExp1; k++) {
                 statJoint += beta_dot[k] * StempGE[k];
+	    }
             R_pvalJoint = (std::isnan(statJoint) || statJoint <= 0.0) ? NAN : boost::math::cdf(complement(chisq_dist_Joint, statJoint));
         }
 
@@ -311,7 +314,8 @@ void regem(CommandLine* cmd)
                     }
                 }
             }
-            oss << values[mbPvalMarginalColumn ] << "\t" << M_pvalInt << "\t" << M_pvalJoint << "\t";
+            
+	    oss << values[mbPvalMarginalColumn ] << "\t" << M_pvalInt << "\t" << M_pvalJoint << "\t";
             oss << values[rbPvalMarginalColumn ] << "\t" <<  R_pvalInt << "\t" << R_pvalJoint << "\n";
         } else {
             for (size_t ii = printStart; ii < printEnd; ii++) {
@@ -344,6 +348,8 @@ void regem(CommandLine* cmd)
     delete[] VE_dot;
     delete[] O;
     delete[] O_dot;
+    delete[] OV_prod;
+    delete[] MRV_prod;
     delete[] RV_dot;
     delete[] A_i;
 

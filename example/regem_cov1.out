@@ -1,3 +1,4 @@
+#dispersion: 4.08498
 SNPID	RSID	CHR	POS	Non_Effect_Allele	Effect_Allele	N_Samples	AF	N_cov1_0	AF_cov1_0	N_cov1_1	AF_cov1_1	Beta_Marginal	SE_Beta_Marginal	robust_SE_Beta_Marginal	Beta_G	Beta_G-cov1	SE_Beta_G	SE_Beta_G-cov1	Cov_Beta_G_G-cov1	robust_SE_Beta_G	robust_SE_Beta_G-cov1	robust_Cov_Beta_G_G-cov1	P_Value_Marginal	P_Value_Interaction	P_Value_Joint	robust_P_Value_Marginal	robust_P_Value_Interaction	robust_P_Value_Joint
 rs1	rs1	1	1	A	C	250	0.366	172	0.363372	78	0.371795	-0.0899904	0.188769	0.177064	-0.100351	-0.399915	0.18908	0.418717	0.00454207	0.177133	0.38941	0.00243437	0.63356	0.339529	0.565675	0.611287	0.304431	0.512673
 rs2	rs2	1	2	A	C	250	0.4	172	0.398256	78	0.403846	-0.143718	0.176683	0.170706	-0.144873	0.0312699	0.177216	0.371654	-0.00510353	0.170012	0.367897	0.000698106	0.415977	0.932947	0.715791	0.399843	0.932264	0.69244
