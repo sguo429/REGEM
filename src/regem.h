@@ -6,7 +6,6 @@
 #include <chrono>
 #include <numeric>
 #include <unordered_map>
-#include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 #include <boost/math/distributions/chi_squared.hpp>
 

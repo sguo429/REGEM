@@ -21,7 +21,7 @@ Current version: 1.0
 
 - C++ compiler with C++11 support
 - [Boost C++ Libraries](https://www.boost.org/) (Versions 1.70.0 - 1.79.0)
-- [LAPACK and the BLAS](https://netlib.org/lapack/lug/node11.html)
+- Intel Math Kernal Library (MKL)
 
 <br />
 
@@ -76,7 +76,7 @@ File Options:
    		Modifies the output of REGEM. Must be one of the following:
    			minimum: Output the summary statistics for only the GxE and marginal G terms.
    			   meta: 'minimum' output plus additional fields for the main G and any GxCovariate terms.
-   				     For a robust analysis, additional columns for the model-based summary statistics will be included.
+   				 For a robust analysis, additional columns for the model-based summary statistics will be included.
    			   full: 'meta' output plus additional fields needed for re-analyses of a subset of interactions.
    			Default: full  
 
@@ -144,7 +144,7 @@ robust_P_Value_Joint       - Joint test p-value (K+1 degrees of freedom test of 
 ### Examples  
 
 ```unix
-./REGEM --results-file gem.out --exposure-names cov1 --out regem_cov1.out
+./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out
 ```
 <br />
 <br />
