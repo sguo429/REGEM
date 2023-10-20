@@ -31,10 +31,18 @@ void CommandLine::processCommandLine(int argc, char* argv[])
     resultsfile.add_options()
         ("exposure-names", po::value<std::vector<std::string>>()->multitoken(), "")
         ("int-covar-names", po::value<std::vector<std::string>>()->multitoken(), "");
+  
+    // Add by sguo
+    // Center Conversion Options
+    po::options_description centerConversion("Center Conversion Options");
+    centerConversion.add_options()
+    ("center-in", po::value<int>()->default_value(0), "")
+    ("center-out", po::value<int>()->default_value(0), "")
+    ("mean-value", po::value<std::vector<std::string>>()->multitoken(), "");
 
     // Combine all options together
     po::options_description all("Options");
-    all.add(general).add(files).add(resultsfile);
+    all.add(general).add(files).add(resultsfile).add(centerConversion);
 
     po::variables_map out;
 
@@ -116,6 +124,40 @@ void CommandLine::processCommandLine(int argc, char* argv[])
         }
     }
     nInt1 = interactions.size() + 1;
+
+    // Add by sguo
+    // Centering Input
+    if (out.count("center-in")) {
+        center_in_type = out["center-in"].as<int>();
+        if (center_in_type < 0 || center_in_type > 2) {
+            cout << "\nERROR: Invalid value for --center-in. It should be 0, 1, or 2.\n\n";
+            exit(1);
+        }
+    }
+
+    // Centering Output
+    if (out.count("center-out")) {
+        center_out_type = out["center-out"].as<int>();
+        if (center_out_type < 0 || center_out_type > 2) {
+            cout << "\nERROR: Invalid value for --center-out. It should be 0, 1, or 2.\n\n";
+            exit(1);
+        }
+    }
+
+    // Mean Values
+    std::map<std::string, double> meanValues;
+    if (out.count("mean-value")) {
+        auto meanValuePairs = out["mean-value"].as<std::vector<std::string>>();
+        if (meanValuePairs.size() % 2 != 0) {
+            cout << "\nERROR: --mean-value should be provided in pairs (e.g. --mean-value BMI 25.62).\n\n";
+            exit(1);
+        }
+        for (size_t i = 0; i < meanValuePairs.size(); i += 2) {
+            std::string variable = meanValuePairs[i];
+            double value = std::stod(meanValuePairs[i + 1]);
+            meanValues[variable] = value;
+        }
+    }
 
 
     // Output file
@@ -218,6 +260,12 @@ void print_help() {
         << "   --exposure-names \t One or more column names in the input file naming the exposure(s) to be included in interaction tests." << endl
         << "   --int-covar-names \t Any column names in the input file naming the covariate(s) for which interactions should\n \t\t\t   be included for adjustment (mutually exclusive with --exposure-names)." << endl;
     cout << endl << endl;
-    cout << endl << endl;
 
+    //Add by sguo
+    cout << "Center Conversion Options: " << endl
+       << "   --center-in \t\t Input centering type (0, 1, or 2)." << endl
+       << "   --center-out \t Output centering type (0, 1, or 2)." << endl
+       << "   --mean-value \t Mean value for variables (e.g. --mean-value BMI 25.62). Can be used multiple times for different variables." << endl;
+    cout << endl << endl;
+    cout << endl << endl;
 }
