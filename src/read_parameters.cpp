@@ -145,9 +145,8 @@ void CommandLine::processCommandLine(int argc, char* argv[])
     }
 
     // Mean Values
-    std::map<std::string, double> meanValues;
     if (out.count("mean-value")) {
-        auto meanValuePairs = out["mean-value"].as<std::vector<std::string>>();
+        std::vector<std::string> meanValuePairs = out["mean-value"].as<std::vector<std::string>>();
         if (meanValuePairs.size() % 2 != 0) {
             cout << "\nERROR: --mean-value should be provided in pairs (e.g. --mean-value BMI 25.62).\n\n";
             exit(1);
