@@ -42,9 +42,11 @@ void centerConversion(
         M[0][i] = 2 * orderedMeanValues[i - 1];
         M[0][(i * dim) + i] = std::pow(orderedMeanValues[i - 1], 2);
         M[i][(i * dim) + i] = orderedMeanValues[i - 1];
+        M[i*dim][(i * dim) + i] = orderedMeanValues[i - 1];
         for (size_t j = i + 1; j < dim; j++) {
             M[0][(i * dim) + j] = 2 * orderedMeanValues[i - 1] * orderedMeanValues[j - 1];
             M[i][(i * dim) + j] = orderedMeanValues[j - 1];
+            M[i*dim][(i * dim) + j] = orderedMeanValues[j - 1];
         }
     }
 
