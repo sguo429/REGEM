@@ -9,8 +9,8 @@ void centerConversion(
     std::vector<int> betaIntIndex, 
     std::vector<int> mbCovIndex,
     int nExp,
-    int center_in,
-    int center_out) 
+    int centerIn,
+    int centerOut) 
 {
     // Read in all the names of interaction variables
     interaction_names.erase(interaction_names.begin());
@@ -39,30 +39,30 @@ void centerConversion(
     }
 
     // Adjust orderedMeanValues based on the centering conversion requirement
-    if (center_in == center_out) {
+    if (centerIn == centerOut) {
         return;
-    } else if (center_in == 0 && center_out == 1) {
+    } else if (centerIn == 0 && centerOut == 1) {
         // Do nothing
-    } else if (center_in == 1 && center_out == 0) {
+    } else if (centerIn == 1 && centerOut == 0) {
         for (auto& val : orderedMeanValues) {
             val = -val;
         }
-    } else if (center_in == 0 && center_out == 2) {
+    } else if (centerIn == 0 && centerOut == 2) {
         for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
-    } else if (center_in == 2 && center_out == 0) {
+    } else if (centerIn == 2 && centerOut == 0) {
         for (size_t i = nExp; i < orderedMeanValues.size(); ++i) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
         for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
-    } else if (center_in == 2 && center_out == 1) {
+    } else if (centerIn == 2 && centerOut == 1) {
         for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
-    } else if (center_in == 1 && center_out == 2) {
+    } else if (centerIn == 1 && centerOut == 2) {
         for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
