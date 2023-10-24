@@ -1,7 +1,4 @@
-#include <vector>
-#include <unordered_map>
-#include <string>
-#include <cmath>
+#include "regem.h"
 
 void centerConversion(
     std::vector<double>& beta, 
