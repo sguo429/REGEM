@@ -15,7 +15,7 @@ void centerConversion(
     std::vector<int> betaIntIndex, 
     std::vector<int> mbCovIndex,
     int nExp,
-    int center_in,
-    int center_out);
+    int centerIn,
+    int centerOut);
 
 #endif // CENTER_H
