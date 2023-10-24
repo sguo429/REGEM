@@ -121,5 +121,126 @@ void centerConversion(
     mb_v = newMb_v;
 }
 
+void centerConversion_rb(
+    std::vector<double>& beta, 
+    std::vector<double>& rb_v, 
+    std::unordered_map<std::string, double> meanValues, 
+    std::vector<std::string> interaction_names, 
+    size_t dim,
+    std::vector<int> betaIntIndex, 
+    std::vector<int> rbCovIndex,
+    int nExp,
+    int centerIn,
+    int centerOut) 
+{
+    // Read in all the names of interaction variables
+    interaction_names.erase(interaction_names.begin());
+
+    for (auto& name : interaction_names) {
+        if (name.substr(0, 2) == "G-") {
+            name = name.substr(2);
+        }
+    } 
+    
+    for (const auto& pair : meanValues) {
+        if (std::find(interaction_names.begin(), interaction_names.end(), pair.first) == interaction_names.end()) {
+            cout << "\nERROR: Interaction" << pair.first << "does not exist.\n\n";
+            exit(1);
+        }
+    }
+
+    // Create ordered mean values
+    std::vector<double> orderedMeanValues;
+    for (const char& c : interaction_names) {
+        if (meanValues.find(std::string(1, c)) != meanValues.end()) {
+            orderedMeanValues.push_back(meanValues.at(std::string(1, c)));
+        } else {
+            orderedMeanValues.push_back(0.0);
+        }
+    }
+
+    // Adjust orderedMeanValues based on the centering conversion requirement
+    if (centerIn == centerOut) {
+        return;
+    } else if (centerIn == 0 && centerOut == 1) {
+        // Do nothing
+    } else if (centerIn == 1 && centerOut == 0) {
+        for (auto& val : orderedMeanValues) {
+            val = -val;
+        }
+    } else if (centerIn == 0 && centerOut == 2) {
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (centerIn == 2 && centerOut == 0) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); ++i) {
+            orderedMeanValues[i] = -orderedMeanValues[i];
+        }
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (centerIn == 2 && centerOut == 1) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (centerIn == 1 && centerOut == 2) {
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = -orderedMeanValues[i];
+        }
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else{
+            cout << "\nERROR: Invalid --center-in or/and --center-out value(s).\n\n";
+            exit(1);
+    }
+
+    // Create matrix C
+    std::vector<std::vector<double>> C(dim, std::vector<double>(dim, 0.0));
+    C[0][0] = 1.0;
+    for (size_t i = 1; i < dim; i++) {
+        C[i][i] = 1.0;
+        C[0][i] = orderedMeanValues[i - 1];
+    }
+
+    // Create matrix M
+    size_t mDim = dim*dim;
+    std::vector<std::vector<double>> M(mDim, std::vector<double>(mDim, 0.0));
+
+    for (size_t i = 0; i < mDim; i++) {
+        M[i][i] = 1.0;
+    }
+
+    for (size_t i = 1; i < dim; i++) {
+        M[0][i] = 2 * orderedMeanValues[i - 1];
+        M[0][(i * dim) + i] = std::pow(orderedMeanValues[i - 1], 2);
+        M[i][(i * dim) + i] = orderedMeanValues[i - 1];
+        M[i*dim][(i * dim) + i] = orderedMeanValues[i - 1];
+        for (size_t j = i + 1; j < dim; j++) {
+            M[0][(i * dim) + j] = 2 * orderedMeanValues[i - 1] * orderedMeanValues[j - 1];
+            M[i][(i * dim) + j] = orderedMeanValues[j - 1];
+            M[i*dim][(i * dim) + j] = orderedMeanValues[j - 1];
+        }
+    }
+
+    // Multiply beta with C
+    std::vector<double> newBeta(dim, 0.0);
+    for (size_t i = 0; i < dim; i++) {
+        for (size_t j = 0; j < dim; j++) {
+            newBeta[i] += C[i][j] * beta[j];
+        }
+    }
+    beta = newBeta;
+
+    // Multiply rb_v with M
+    std::vector<double> newRb_v(mDim, 0.0);
+    for (size_t i = 0; i < mDim; i++) {
+        for (size_t j = 0; j < mDim; j++) {
+            newRb_v[i] += M[i][j] * rb_v[j];
+        }
+    }
+    rb_v = newRb_v;
+}
+
 
 
