@@ -148,6 +148,13 @@ void regem(CommandLine* cmd)
             }
         }
 
+	// Centering conversions of Betas and covariances
+	if (robust){
+		centerConversion_rb(beta, rb_v, cmd->meanValues, fip->interaction_names, dim, betaIntIndex, mbCovIndex, nExp, cmd->center_in, cmd->center_out);
+	}else{
+		centerConversion(beta, mb_v, cmd->meanValues, fip->interaction_names, dim, betaIntIndex, mbCovIndex, nExp, cmd->center_in, cmd->center_out);
+	}
+	    
         // Compute V from model-based variance-covariance matrix
         matInv(&mb_v[0], dim);
         for (size_t i = 0; i < dim*dim; i++)
