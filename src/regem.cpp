@@ -150,7 +150,7 @@ void regem(CommandLine* cmd)
 
 	// Centering conversions of Betas and covariances
 	if (robust){
-		centerConversion_rb(beta, rb_v, cmd->meanValues, fip->interaction_names, dim, betaIntIndex, mbCovIndex, nExp, cmd->centerIn, cmd->centerOut);
+		centerConversion_rb(beta, rb_v, cmd->meanValues, fip->interaction_names, dim, betaIntIndex, rbCovIndex, nExp, cmd->centerIn, cmd->centerOut);
 	}else{
 		centerConversion(beta, mb_v, cmd->meanValues, fip->interaction_names, dim, betaIntIndex, mbCovIndex, nExp, cmd->centerIn, cmd->centerOut);
 	}
