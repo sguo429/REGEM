@@ -6,14 +6,14 @@
 void centerConversion(
     std::vector<double>& beta, 
     std::vector<double>& mb_v, 
-    const std::unordered_map<std::string, double>& meanValues, 
+    std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
-    const size_t dim,
-    const std::vector<int>& betaIntIndex, 
-    const std::vector<int>& mbCovIndex,
-    const int nExp,
-    const int center_in,
-    const int center_out) 
+    size_t dim,
+    std::vector<int> betaIntIndex, 
+    std::vector<int> mbCovIndex,
+    int nExp,
+    int center_in,
+    int center_out) 
 {
     // Read in all the names of interaction variables
     interaction_names.erase(interaction_names.begin());
