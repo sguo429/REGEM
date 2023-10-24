@@ -32,7 +32,6 @@ void CommandLine::processCommandLine(int argc, char* argv[])
         ("exposure-names", po::value<std::vector<std::string>>()->multitoken(), "")
         ("int-covar-names", po::value<std::vector<std::string>>()->multitoken(), "");
   
-    // Add by sguo
     // Center Conversion Options
     po::options_description centerConversion("Center Conversion Options");
     centerConversion.add_options()
@@ -125,11 +124,10 @@ void CommandLine::processCommandLine(int argc, char* argv[])
     }
     nInt1 = interactions.size() + 1;
 
-    // Add by sguo
     // Centering Input
     if (out.count("center-in")) {
-        center_in_type = out["center-in"].as<int>();
-        if (center_in_type < 0 || center_in_type > 2) {
+        centerIn = out["center-in"].as<int>();
+        if (centerIn < 0 || centerIn > 2) {
             cout << "\nERROR: Invalid value for --center-in. It should be 0, 1, or 2.\n\n";
             exit(1);
         }
@@ -137,8 +135,8 @@ void CommandLine::processCommandLine(int argc, char* argv[])
 
     // Centering Output
     if (out.count("center-out")) {
-        center_out_type = out["center-out"].as<int>();
-        if (center_out_type < 0 || center_out_type > 2) {
+        centerOut = out["center-out"].as<int>();
+        if (centerOut < 0 || centerOut > 2) {
             cout << "\nERROR: Invalid value for --center-out. It should be 0, 1, or 2.\n\n";
             exit(1);
         }
@@ -260,7 +258,7 @@ void print_help() {
         << "   --int-covar-names \t Any column names in the input file naming the covariate(s) for which interactions should\n \t\t\t   be included for adjustment (mutually exclusive with --exposure-names)." << endl;
     cout << endl << endl;
 
-    //Add by sguo
+  
     cout << "Center Conversion Options: " << endl
        << "   --center-in \t\t Input centering type (0, 1, or 2)." << endl
        << "   --center-out \t Output centering type (0, 1, or 2)." << endl
