@@ -29,6 +29,10 @@ public:
 	int  printStart = 0;
 	int  printEnd   = 0;
 
+	// Center conversion options
+	int centerIn
+	int centerOut
+	
 	// Performance options
 	int threads;
 	void processCommandLine(int argc, char* argv[]);
