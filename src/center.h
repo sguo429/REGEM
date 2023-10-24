@@ -1,3 +1,6 @@
+#ifndef CENTER_H
+#define CENTER_H
+
 #include <vector>
 #include <unordered_map>
 #include <string>
@@ -14,3 +17,5 @@ void centerConversion(
     int nExp,
     int center_in,
     int center_out);
+
+#endif // CENTER_H
