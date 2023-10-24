@@ -24,6 +24,13 @@ void centerConversion(
         }
     } 
     
+    for (const auto& pair : meanValues) {
+        if (std::find(interaction_names.begin(), interaction_names.end(), pair.first) == interaction_names.end()) {
+            cout << "\nERROR: Interaction" << pair.first << "does not exist.\n\n";
+            exit(1);
+        }
+    }
+
     // Create ordered mean values
     std::vector<double> orderedMeanValues;
     for (const char& c : interaction_names) {
