@@ -18,4 +18,16 @@ void centerConversion(
     int centerIn,
     int centerOut);
 
+void centerConversion_rb(
+    std::vector<double>& beta, 
+    std::vector<double>& rb_v, 
+    std::unordered_map<std::string, double> meanValues, 
+    std::vector<std::string> interaction_names, 
+    size_t dim,
+    std::vector<int> betaIntIndex, 
+    std::vector<int> rbCovIndex,
+    int nExp,
+    int centerIn,
+    int centerOut);
+
 #endif // CENTER_H
