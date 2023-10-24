@@ -7,19 +7,67 @@ void centerConversion(
     std::vector<double>& beta, 
     std::vector<double>& mb_v, 
     const std::unordered_map<std::string, double>& meanValues, 
-    const std::string& interaction, 
+    std::vector<std::string> interaction_names, 
     const size_t dim,
     const std::vector<int>& betaIntIndex, 
-    const std::vector<int>& mbCovIndex) 
+    const std::vector<int>& mbCovIndex,
+    const int nExp,
+    const int center_in,
+    const int center_out) 
 {
+    // Read in all the names of interaction variables
+    interaction_names.erase(interaction_names.begin());
+
+    for (auto& name : interaction_names) {
+        if (name.substr(0, 2) == "G-") {
+            name = name.substr(2);
+        }
+    } 
+    
     // Create ordered mean values
     std::vector<double> orderedMeanValues;
-    for (const char& c : interaction) {
+    for (const char& c : interaction_names) {
         if (meanValues.find(std::string(1, c)) != meanValues.end()) {
             orderedMeanValues.push_back(meanValues.at(std::string(1, c)));
         } else {
-            orderedMeanValues.push_back(0.0);  // Default to 0 if not provided
+            orderedMeanValues.push_back(0.0);
         }
+    }
+
+    // Adjust orderedMeanValues based on the centering conversion requirement
+    if (center_in == center_out) {
+        return;
+    } else if (center_in == 0 && center_out == 1) {
+        // Do nothing
+    } else if (center_in == 1 && center_out == 0) {
+        for (auto& val : orderedMeanValues) {
+            val = -val;
+        }
+    } else if (center_in == 0 && center_out == 2) {
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (center_in == 2 && center_out == 0) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); ++i) {
+            orderedMeanValues[i] = -orderedMeanValues[i];
+        }
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (center_in == 2 && center_out == 1) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else if (center_in == 1 && center_out == 2) {
+        for (size_t i = 0; i < nExp; i++) {
+            orderedMeanValues[i] = -orderedMeanValues[i];
+        }
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+            orderedMeanValues[i] = 0.0;
+        }
+    } else{
+            cout << "\nERROR: Invalid --center-in or/and --center-out value(s).\n\n";
+            exit(1);
     }
 
     // Create matrix C
