@@ -32,7 +32,8 @@ public:
 	// Center conversion options
 	int centerIn
 	int centerOut
-	
+	std::unordered_map<std::string, double> meanValues
+
 	// Performance options
 	int threads;
 	void processCommandLine(int argc, char* argv[]);
