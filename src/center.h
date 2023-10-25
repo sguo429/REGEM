@@ -17,7 +17,6 @@ void centerConversion(
     int centerOut);
 
 void centerConversion_rb(
-    std::vector<double>& beta, 
     std::vector<double>& rb_v, 
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
