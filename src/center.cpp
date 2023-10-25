@@ -67,7 +67,7 @@ void centerConversion(
         }
     }
 
-    // Create matrix C
+    // Create matrix C for converting betas
     std::vector<std::vector<double>> C(dim, std::vector<double>(dim, 0.0));
     C[0][0] = 1.0;
     for (size_t i = 1; i < dim; i++) {
@@ -75,7 +75,7 @@ void centerConversion(
         C[0][i] = orderedMeanValues[i - 1];
     }
 
-    // Create matrix M
+    // Create matrix M for converting covariances
     size_t mDim = dim*dim;
     std::vector<std::vector<double>> M(mDim, std::vector<double>(mDim, 0.0));
 
@@ -114,8 +114,7 @@ void centerConversion(
     mb_v = newMb_v;
 }
 
-void centerConversion_rb(
-    std::vector<double>& beta, 
+void centerConversion_rb( 
     std::vector<double>& rb_v, 
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
@@ -181,15 +180,7 @@ void centerConversion_rb(
         }
     }
 
-    // Create matrix C
-    std::vector<std::vector<double>> C(dim, std::vector<double>(dim, 0.0));
-    C[0][0] = 1.0;
-    for (size_t i = 1; i < dim; i++) {
-        C[i][i] = 1.0;
-        C[0][i] = orderedMeanValues[i - 1];
-    }
-
-    // Create matrix M
+    // Create matrix M for converting covariances
     size_t mDim = dim*dim;
     std::vector<std::vector<double>> M(mDim, std::vector<double>(mDim, 0.0));
 
@@ -208,15 +199,6 @@ void centerConversion_rb(
             M[i*dim][(i * dim) + j] = orderedMeanValues[j - 1];
         }
     }
-
-    // Multiply beta with C
-    std::vector<double> newBeta(dim, 0.0);
-    for (size_t i = 0; i < dim; i++) {
-        for (size_t j = 0; j < dim; j++) {
-            newBeta[i] += C[i][j] * beta[j];
-        }
-    }
-    beta = newBeta;
 
     // Multiply rb_v with M
     std::vector<double> newRb_v(mDim, 0.0);
