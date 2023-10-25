@@ -12,8 +12,6 @@ void centerConversion(
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
     size_t dim,
-    std::vector<int> betaIntIndex, 
-    std::vector<int> mbCovIndex,
     int nExp,
     int centerIn,
     int centerOut);
@@ -24,8 +22,6 @@ void centerConversion_rb(
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
     size_t dim,
-    std::vector<int> betaIntIndex, 
-    std::vector<int> rbCovIndex,
     int nExp,
     int centerIn,
     int centerOut);
