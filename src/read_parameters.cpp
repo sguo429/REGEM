@@ -151,10 +151,21 @@ void CommandLine::processCommandLine(int argc, char* argv[])
         }
         for (size_t i = 0; i < meanValuePairs.size(); i += 2) {
             std::string variable = meanValuePairs[i];
-            double value = std::stod(meanValuePairs[i + 1]);
+            std::string valueStr = meanValuePairs[i + 1];
+        
+            // Check if the value is a valid number
+            try {
+                std::stod(valueStr);
+            } catch (const std::invalid_argument&) {
+                cout << "\nERROR: Value for " << variable << " (" << valueStr << ") is not a valid number.\n\n";
+                exit(1);
+            }
+        
+            double value = std::stod(valueStr);
             meanValues[variable] = value;
         }
     }
+
 
 
     // Output file
