@@ -155,17 +155,14 @@ void CommandLine::processCommandLine(int argc, char* argv[])
         
             // Check if the value is a valid number
             try {
-                std::stod(valueStr);
+                double value = std::stod(valueStr);
+                meanValues[variable] = value;
             } catch (const std::invalid_argument&) {
                 cout << "\nERROR: Value for " << variable << " (" << valueStr << ") is not a valid number.\n\n";
                 exit(1);
             }
-        
-            double value = std::stod(valueStr);
-            meanValues[variable] = value;
         }
     }
-
 
 
     // Output file
