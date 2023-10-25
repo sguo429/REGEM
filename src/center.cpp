@@ -37,9 +37,7 @@ void centerConversion(
     }
 
     // Adjust orderedMeanValues based on the centering conversion requirement
-    if (centerIn == centerOut) {
-        return;
-    } else if (centerIn == 0 && centerOut == 1) {
+    if (centerIn == 0 && centerOut == 1) {
         // Do nothing
     } else if (centerIn == 1 && centerOut == 0) {
         for (auto& val : orderedMeanValues) {
@@ -67,9 +65,6 @@ void centerConversion(
         for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
-    } else{
-            cout << "\nERROR: Invalid --center-in or/and --center-out value(s).\n\n";
-            exit(1);
     }
 
     // Create matrix C
@@ -156,9 +151,7 @@ void centerConversion_rb(
     }
 
     // Adjust orderedMeanValues based on the centering conversion requirement
-    if (centerIn == centerOut) {
-        return;
-    } else if (centerIn == 0 && centerOut == 1) {
+    if (centerIn == 0 && centerOut == 1) {
         // Do nothing
     } else if (centerIn == 1 && centerOut == 0) {
         for (auto& val : orderedMeanValues) {
@@ -186,9 +179,6 @@ void centerConversion_rb(
         for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
-    } else{
-            cout << "\nERROR: Invalid --center-in or/and --center-out value(s).\n\n";
-            exit(1);
     }
 
     // Create matrix C
