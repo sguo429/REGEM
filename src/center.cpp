@@ -48,7 +48,7 @@ void centerConversion(
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 0) {
-        for (size_t i = nExp; i < orderedMeanValues.size(); ++i) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
         for (size_t i = 0; i < nExp; i++) {
@@ -161,7 +161,7 @@ void centerConversion_rb(
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 0) {
-        for (size_t i = nExp; i < orderedMeanValues.size(); ++i) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
         for (size_t i = 0; i < nExp; i++) {
