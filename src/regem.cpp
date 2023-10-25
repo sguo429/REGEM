@@ -81,9 +81,9 @@ void regem(CommandLine* cmd)
     size_t nInt1  = cmd->nInt1;
     size_t printStart = cmd->printStart;
     size_t printEnd   = cmd->printEnd;
-    int centerIn = cmd->centerIn
-    int centerOut = cmd->centerOut
-		
+    int centerIn   = cmd->centerIn;
+    int centerOut   = cmd->centerOut;
+    std::unordered_map<std::string, double> meanValues = cmd->meanValues;
 	
     bool subcategorical_exists = fip->subcategorical_exists;
     size_t nsubcategorical_columns = fip->subcategorical_file_index.size();
@@ -102,6 +102,7 @@ void regem(CommandLine* cmd)
     std::vector<int> rbCovIndex     = fip->rbCovIndex;
     std::vector<int> betaIntIndex   = fip->betaIntIndex;
     std::vector<int> varInfoIndices = fip->varInfoIndices;
+    std::vector<std::string> interaction_names = fip->interaction_names;
 
     std::vector<double> beta(dim);
     std::vector<double> mb_v(dim*dim);
@@ -152,12 +153,14 @@ void regem(CommandLine* cmd)
         }
 
 	// Centering conversions of Betas and covariances
-	if (robust){
-		centerConversion_rb(beta, rb_v, cmd->meanValues, fip->interaction_names, dim, nExp, cmd->centerIn, cmd->centerOut);
-	}else{
-		centerConversion(beta, mb_v, cmd->meanValues, fip->interaction_names, dim, nExp, cmd->centerIn, cmd->centerOut);
+	if(centerIn != centerOut){
+		if (robust){
+			centerConversion_rb(beta, rb_v, meanValues, interaction_names, dim, nExp, centerIn, centerOut);
+		}else{
+			centerConversion(beta, mb_v, meanValues, interaction_names, dim, nExp, centerIn, centerOut);
+		}
 	}
-	    
+   
         // Compute V from model-based variance-covariance matrix
         matInv(&mb_v[0], dim);
         for (size_t i = 0; i < dim*dim; i++)
