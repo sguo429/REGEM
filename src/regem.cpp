@@ -81,7 +81,10 @@ void regem(CommandLine* cmd)
     size_t nInt1  = cmd->nInt1;
     size_t printStart = cmd->printStart;
     size_t printEnd   = cmd->printEnd;
-
+    int centerIn = cmd->centerIn
+    int centerOut = cmd->centerOut
+		
+	
     bool subcategorical_exists = fip->subcategorical_exists;
     size_t nsubcategorical_columns = fip->subcategorical_file_index.size();
     std::vector<std::vector<int>> subcategorical_file_index = fip->subcategorical_file_index;
