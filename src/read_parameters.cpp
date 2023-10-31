@@ -267,10 +267,10 @@ void print_help() {
     cout << endl << endl;
 
   
-    cout << "Center Conversion Options: " << endl
+    cout << "Centering Conversion Options: " << endl
        << "   --center-in \t\t Input centering type (0, 1, or 2)." << endl
        << "   --center-out \t Output centering type (0, 1, or 2)." << endl
-       << "   --mean-value \t Mean value for variables (e.g. --mean-value BMI 25.62). Can be used multiple times for different variables." << endl;
+       << "   --mean-value \t Mean value for variables (e.g. --mean-value age 24 BMI 20.7)." << endl;
     cout << endl << endl;
     cout << endl << endl;
 }
