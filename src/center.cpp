@@ -27,14 +27,14 @@ void centerConversion(
     }
 
     // Create ordered mean values
-    std::vector<double> orderedMeanValues;
-    for (const char& c : interaction_names) {
-        if (meanValues.find(std::string(1, c)) != meanValues.end()) {
-            orderedMeanValues.push_back(meanValues.at(std::string(1, c)));
+    for (const std::string& s : interaction_names) {
+        if (meanValues.find(s) != meanValues.end()) {
+            orderedMeanValues.push_back(meanValues.at(s));
         } else {
             orderedMeanValues.push_back(0.0);
         }
     }
+
 
     // Adjust orderedMeanValues based on the centering conversion requirement
     if (centerIn == 0 && centerOut == 1) {
@@ -44,25 +44,25 @@ void centerConversion(
             val = -val;
         }
     } else if (centerIn == 0 && centerOut == 2) {
-        for (size_t i = 0; i < nExp; i++) {
+        for (int i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 0) {
-        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+        for (int i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
-        for (size_t i = 0; i < nExp; i++) {
+        for (int i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 1) {
-        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+        for (int i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 1 && centerOut == 2) {
-        for (size_t i = 0; i < nExp; i++) {
+        for (int i = 0; i < nExp; i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
-        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
+        for (int i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
     }
