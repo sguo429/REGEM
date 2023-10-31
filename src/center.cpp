@@ -27,6 +27,7 @@ void centerConversion(
     }
 
     // Create ordered mean values
+    std::vector<double> orderedMeanValues;
     for (const std::string& s : interaction_names) {
         if (meanValues.find(s) != meanValues.end()) {
             orderedMeanValues.push_back(meanValues.at(s));
@@ -119,7 +120,7 @@ void centerConversion_rb(
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
     size_t dim,
-    int nExp,
+    size_t nExp,
     int centerIn,
     int centerOut) 
 {
@@ -141,9 +142,9 @@ void centerConversion_rb(
 
     // Create ordered mean values
     std::vector<double> orderedMeanValues;
-    for (const char& c : interaction_names) {
-        if (meanValues.find(std::string(1, c)) != meanValues.end()) {
-            orderedMeanValues.push_back(meanValues.at(std::string(1, c)));
+    for (const std::string& s : interaction_names) {
+        if (meanValues.find(s) != meanValues.end()) {
+            orderedMeanValues.push_back(meanValues.at(s));
         } else {
             orderedMeanValues.push_back(0.0);
         }
