@@ -31,9 +31,9 @@ public:
 	int  printEnd   = 0;
 
 	// Center conversion options
-	int centerIn
-	int centerOut
-	std::unordered_map<std::string, double> meanValues
+	int centerIn;
+	int centerOut;
+	std::unordered_map<std::string, double> meanValues;
 
 	// Performance options
 	int threads;
