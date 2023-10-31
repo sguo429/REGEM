@@ -6,7 +6,7 @@ void centerConversion(
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
     size_t dim,
-    int nExp,
+    size_t nExp,
     int centerIn,
     int centerOut) 
 {
@@ -44,25 +44,25 @@ void centerConversion(
             val = -val;
         }
     } else if (centerIn == 0 && centerOut == 2) {
-        for (int i = 0; i < nExp; i++) {
+        for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 0) {
-        for (int i = nExp; i < orderedMeanValues.size(); i++) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
-        for (int i = 0; i < nExp; i++) {
+        for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 2 && centerOut == 1) {
-        for (int i = nExp; i < orderedMeanValues.size(); i++) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
     } else if (centerIn == 1 && centerOut == 2) {
-        for (int i = 0; i < nExp; i++) {
+        for (size_t i = 0; i < nExp; i++) {
             orderedMeanValues[i] = -orderedMeanValues[i];
         }
-        for (int i = nExp; i < orderedMeanValues.size(); i++) {
+        for (size_t i = nExp; i < orderedMeanValues.size(); i++) {
             orderedMeanValues[i] = 0.0;
         }
     }
