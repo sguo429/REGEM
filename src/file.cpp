@@ -65,7 +65,9 @@ void processFileHeader(std::string fileName, std::vector<std::string> interactio
     get_variantInfo_indices(columnNames, fip);
 
     // Generate new headers for the categorical variables
-    generate_subcategorical_columns(nInt1, columnNames, interactions, categorical_columns, fip);
+    if (!categorical_columns.empty()) {
+        generate_subcategorical_columns(nInt1, columnNames, interactions, categorical_columns, fip);
+    }
 
     // Get marginal summary statistics indices
     get_marginal_indices(columnNames, fip);
