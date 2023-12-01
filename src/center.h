@@ -8,16 +8,9 @@
 
 void centerConversion(
     std::vector<double>& beta, 
-    std::vector<double>& mb_v, 
-    std::unordered_map<std::string, double> meanValues, 
-    std::vector<std::string> interaction_names, 
-    size_t dim,
-    size_t nExp,
-    int centerIn,
-    int centerOut);
-
-void centerConversion_rb(
-    std::vector<double>& rb_v, 
+    std::vector<double>& mb_v,
+    std::vector<double>& rb_v,
+    bool robust,
     std::unordered_map<std::string, double> meanValues, 
     std::vector<std::string> interaction_names, 
     size_t dim,
