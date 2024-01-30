@@ -23,7 +23,7 @@ void centerConversion(
     
     for (const auto& pair : meanValues) {
         if (std::find(interaction_names.begin(), interaction_names.end(), pair.first) == interaction_names.end()) {
-            cout << "\nERROR: Interaction" << pair.first << "does not exist.\n\n";
+            cout << "\nERROR: Interaction " << pair.first << " does not exist.\n\n";
             exit(1);
         }
     }
