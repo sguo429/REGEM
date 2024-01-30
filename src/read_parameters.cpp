@@ -144,25 +144,29 @@ void CommandLine::processCommandLine(int argc, char* argv[])
 
     // Mean Values
     if (out.count("mean-value")) {
-        std::vector<std::string> meanValuePairs = out["mean-value"].as<std::vector<std::string>>();
-        if (meanValuePairs.size() % 2 != 0) {
-            cout << "\nERROR: --mean-value should be provided in pairs (e.g. --mean-value BMI 25.62).\n\n";
-            exit(1);
-        }
-        for (size_t i = 0; i < meanValuePairs.size(); i += 2) {
-            std::string variable = meanValuePairs[i];
-            std::string valueStr = meanValuePairs[i + 1];
-        
+    std::vector<std::string> meanValuePairs = out["mean-value"].as<std::vector<std::string>>();
+    
+        for (const auto& pair : meanValuePairs) {
+            size_t equalPos = pair.find('=');
+            if (equalPos == std::string::npos) {
+                cout << "\nERROR: --mean-value should be provided in the format 'variable=value'.\n\n";
+                exit(1);
+            }
+    
+            std::string variable = pair.substr(0, equalPos);
+            std::string valueStr = pair.substr(equalPos + 1);
+    
             // Check if the value is a valid number
             try {
                 double value = std::stod(valueStr);
                 meanValues[variable] = value;
             } catch (const std::invalid_argument&) {
-                cout << "\nERROR: Value for " << variable << " (" << valueStr << ") is not a valid number.\n\n";
-                exit(1);
+                  cout << "\nERROR: Value for " << variable << " (" << valueStr << ") is not a valid number.\n\n";
+                  exit(1);
             }
         }
     }
+
 
 
     // Output file
@@ -270,7 +274,7 @@ void print_help() {
     cout << "Centering Conversion Options: " << endl
        << "   --center-in \t\t Input centering type (0, 1, or 2)." << endl
        << "   --center-out \t Output centering type (0, 1, or 2)." << endl
-       << "   --mean-value \t Mean value for variables (e.g. --mean-value age 24 BMI 20.7)." << endl;
+       << "   --mean-value \t Mean value(s) for the variable(s) in the format 'variable=value' (e.g. --mean-value age=24 BMI=20.7)." << endl;
     cout << endl << endl;
     cout << endl << endl;
 }
