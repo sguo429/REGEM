@@ -92,15 +92,15 @@ Input File Options:
 
 Centering Conversion Options:
 
-  --center-in
-    One value of 0, 1 or 2 which represents the centering status of the GEM output file. 0 for no centering, 1 for centering ALL exposures and covariates, and 2 for centering all the interaction covariates only.
+   --center-in
+      One value of 0, 1 or 2 which represents the centering status of the GEM output file. 0 for no centering, 1 for centering ALL exposures and covariates, and 2 for centering all the interaction covariates only.
 
 
-  --center-out
-    One value of 0, 1 or 2 which represents the centering status of the output file of REGEM. 0 for no centering to be done, 1 to center ALL exposures and covariates, and 2 to center all the interaction covariates only.
+   --center-out
+      One value of 0, 1 or 2 which represents the centering status of the output file of REGEM. 0 for no centering to be done, 1 to center ALL exposures and covariates, and 2 to center all the interaction covariates only.
 
-  --mean-value
-    Pairs of variable name to be centered and the mean value of the variable.
+   --mean-value
+      Pairs of variable name to be centered and the mean value of the variable.
 
 ```
 </details>
