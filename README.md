@@ -93,14 +93,15 @@ Input File Options:
 Centering Conversion Options:
 
    --center-in
-      One value of 0, 1 or 2 which represents the centering status of the GEM output file. 0 for no centering, 1 for centering ALL exposures and covariates, and 2 for centering all the interaction covariates only.
+      A value of 0, 1, or 2 representing the centering status in the GEM output file: 0 indicates no centering, 1 indicates centering of all exposures and covariates, and 2 indicates centering of interaction covariates only.
 
 
    --center-out
-      One value of 0, 1 or 2 which represents the centering status of the output file of REGEM. 0 for no centering to be done, 1 to center ALL exposures and covariates, and 2 to center all the interaction covariates only.
+      A value of 0, 1, or 2 representing the centering status in the REGEM output file: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
+
 
    --mean-value
-      Pairs of variable name to be centered and the mean value of the variable.
+      Pairs of variable names and their mean values, with each pair connected by an equal sign.
 
 ```
 </details>
@@ -158,6 +159,10 @@ robust_P_Value_Joint       - Joint test p-value (K+1 degrees of freedom test of 
 
 ```unix
 ./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out
+
+To change the centering status of cov1 from 0 to 1:
+./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out --center-in 0 --center-out 1 --mean-value cov1=0.5
+
 ```
 <br />
 <br />
