@@ -341,7 +341,7 @@ void regem(CommandLine* cmd)
         }
         p++;
 
-        if (p % 100000 != 0) {
+        if (p % 100000 == 0) {
             results << oss.str();
             oss.str(std::string());
             oss.clear();
