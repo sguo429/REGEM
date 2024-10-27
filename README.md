@@ -159,10 +159,12 @@ robust_P_Value_Joint       - Joint test p-value (K+1 degrees of freedom test of 
 
 ```unix
 ./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out
+```
 
 To change the centering status of cov1 from 0 to 1:
-./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out --center-in 0 --center-out 1 --mean-value cov1=0.5
 
+```unix
+./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out --center-in 0 --center-out 1 --mean-value cov1=0.5
 ```
 <br />
 <br />
