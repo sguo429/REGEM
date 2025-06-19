@@ -187,7 +187,7 @@ If you use REGEM, please cite
 
  ```
  REGEM: RE-analysis of GEM summary statistics
- Copyright (C) 2021-2024 Duy T. Pham and Han Chen
+ Copyright (C) 2021-2025 Duy T. Pham and Han Chen
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
