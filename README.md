@@ -4,7 +4,7 @@ REGEM (RE-analysis of GEM summary statistics) is a software program for re-analy
 
 <br />  
 
-Current version: 1.1
+Current version: 2.0
 
 <br />  
 
