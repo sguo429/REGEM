@@ -93,8 +93,7 @@ Input File Options:
 Centering Conversion Options:
 
    --center-in
-      A value of 0, 1, or 2 representing the original centering status in the input file: 0 indicates no centering, 1 indicates centering of all exposures and covariates, and 2 indicates centering of interaction covariates only.
-
+      A value of 0, 1, or 2 representing the original centering status in the input file: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
 
    --center-out
       A value of 0, 1, or 2 representing the converted centering status: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
