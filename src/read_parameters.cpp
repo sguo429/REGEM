@@ -245,7 +245,7 @@ void CommandLine::processCommandLine(int argc, char* argv[])
 void print_welcome() {
     cout << "\n*********************************************************\n";
     cout << "Welcome to REGEM v" << VERSION << "\n";
-    cout << "(C) 2021-2023 Duy Pham and Han Chen \n";
+    cout << "(C) 2021-2025 Duy Pham and Han Chen \n";
     cout << "GNU General Public License v3\n";
     cout << "*********************************************************\n";
 }
