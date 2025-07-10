@@ -98,9 +98,8 @@ Centering Conversion Options:
    --center-out
       A value of 0, 1, or 2 representing the converted centering status: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
 
-
    --mean-value
-      Pairs of variable names and their mean values, with each pair connected by an equal sign.
+      Pairs of variable names to be centered and their corresponding mean values, with each pair connected by an equal sign.
 
 ```
 </details>
