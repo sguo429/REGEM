@@ -164,6 +164,7 @@ To change the centering status of cov1 from 0 to 1:
 ```unix
 ./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out --center-in 0 --center-out 1 --mean-value cov1=0.5
 ```
+The mean value(s) can be found in the log file of the previous GEM run.
 <br />
 <br />
 
