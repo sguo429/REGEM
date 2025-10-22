@@ -1,5 +1,5 @@
 // <REGEM: RE-analysis of GEM summary statistics>
-// Copyright (C) <2021-2023> Duy T. Pham and Han Chen  
+// Copyright (C) <2021-2025> Duy T. Pham, Han Chen and Shuyi Guo  
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -372,3 +372,4 @@ void printTimeCompleted(double wall0, double wall1, double cpu0, double cpu1)
     cout << "Wall Time = " << wall1 - wall0 << " (sec)\n";
     cout << "CPU Time  = " << cpu1  - cpu0  << " (sec)\n\n";
 }
+
