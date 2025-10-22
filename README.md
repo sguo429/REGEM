@@ -4,7 +4,7 @@ REGEM (RE-analysis of GEM summary statistics) is a software program for re-analy
 
 <br />  
 
-Current version: 1.1
+Current version: 2.0
 
 <br />  
 
@@ -89,6 +89,18 @@ Input File Options:
    --int-covar-names     
    		Any column names in the input file naming the covariate(s) for which interactions should be included for adjustment (mutually exclusive with --exposure-names).
 
+
+Centering Conversion Options:
+
+   --center-in
+      A value of 0, 1, or 2 representing the original centering status in the input file: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
+
+   --center-out
+      A value of 0, 1, or 2 representing the converted centering status: 0 for no centering, 1 to center all exposures and covariates, and 2 to center only the interaction covariates.
+
+   --mean-value
+      Pairs of variable names to be centered and their corresponding mean values, with each pair connected by an equal sign.
+
 ```
 </details>
 
@@ -146,6 +158,13 @@ robust_P_Value_Joint       - Joint test p-value (K+1 degrees of freedom test of 
 ```unix
 ./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out
 ```
+
+To change the centering status of cov1 from 0 to 1:
+
+```unix
+./REGEM --input-file gem.out --exposure-names cov1 --out regem_cov1.out --center-in 0 --center-out 1 --mean-value cov1=0.5
+```
+The mean value(s) can be found in the log file of the previous GEM run.
 <br />
 <br />
 
@@ -167,7 +186,7 @@ If you use REGEM, please cite
 
  ```
  REGEM: RE-analysis of GEM summary statistics
- Copyright (C) 2021-2024 Duy T. Pham and Han Chen
+ Copyright (C) 2021-2025 Duy T. Pham, Han Chen and Shuyi Guo
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -182,3 +201,4 @@ If you use REGEM, please cite
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ```
+
