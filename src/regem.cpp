@@ -75,7 +75,7 @@ void regem(CommandLine* cmd)
     cout << "Running REGEM...\n";
 
     bool robust   = fip->robust;
-    # double sigma2 = fip->sigma2;
+    // double sigma2 = fip->sigma2;
     size_t nExp   = cmd->nExp;
     size_t nExp1  = cmd->nExp1;
     size_t nInt1  = cmd->nInt1;
@@ -159,8 +159,8 @@ void regem(CommandLine* cmd)
    
         // Compute V from model-based variance-covariance matrix
         matInv(&mb_v[0], dim);
-        #for (size_t i = 0; i < dim*dim; i++)
-        #    mb_v[i] *= sigma2;
+        // for (size_t i = 0; i < dim*dim; i++)
+        //     mb_v[i] *= sigma2;
 
         // Compute U
         std::vector<double> u(dim, 0.0);
@@ -225,9 +225,9 @@ void regem(CommandLine* cmd)
         }
 
         // Get model-based variance-covariance 
-        # for (size_t i = 0; i < nInt1 * nInt1; i++) {
-        #     Vi_dot[i] *= sigma2;
-        # }
+        // for (size_t i = 0; i < nInt1 * nInt1; i++) {
+        //     Vi_dot[i] *= sigma2;
+        // }
 
         // Model-based Interaction P-value
         std::vector<double> StempE(nExp, 0.0);
@@ -372,5 +372,6 @@ void printTimeCompleted(double wall0, double wall1, double cpu0, double cpu1)
     cout << "Wall Time = " << wall1 - wall0 << " (sec)\n";
     cout << "CPU Time  = " << cpu1  - cpu0  << " (sec)\n\n";
 }
+
 
 
